@@ -12,6 +12,7 @@ DevBoard helps developers manage tasks, projects, and workflow in a clean, respo
 - CSS3
 - Vanilla JavaScript
 - Tailwind CSS (CDN)
+- LocalStorage
 
 ## Project Structure
 
@@ -42,7 +43,7 @@ devboard/
 | Phase | Status   | Description                         |
 | ----- | -------- | ----------------------------------- |
 | 1     | Complete | Dashboard layout with sidebar & stats |
-| 2     | Planned  | LocalStorage persistence            |
+| 2     | Complete | LocalStorage persistence            |
 | 3     | Planned  | Task management                     |
 | 4     | Planned  | Project management                  |
 | 5     | Planned  | Dark mode support                   |

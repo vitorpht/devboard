@@ -1,10 +1,13 @@
 /**
  * DevBoard — Main Application Entry Point
- * Phase 1: Dashboard layout initialization
+ * Phase 2: Dashboard layout + storage initialization
  */
 
 (function () {
   "use strict";
+
+  /** @type {{ tasks: Array, projects: Array, theme: string } | null} */
+  let appData = null;
 
   /**
    * Initialize responsive sidebar toggle for mobile
@@ -63,7 +66,11 @@
     initSidebar();
     Theme.init();
 
-    console.info("[DevBoard] Application initialized — Phase 1");
+    Storage.initializeStorage();
+    appData = Storage.loadData();
+
+    console.info("[DevBoard] Application initialized — Phase 2");
+    console.info("[DevBoard] Loaded data:", appData);
   }
 
   document.addEventListener("DOMContentLoaded", init);
