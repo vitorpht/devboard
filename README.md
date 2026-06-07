@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # DevBoard
 
 A modern productivity dashboard built with **HTML5**, **CSS3**, **Vanilla JavaScript**, and **Tailwind CSS**.
@@ -52,3 +53,6 @@ devboard/
 ## License
 
 MIT
+=======
+# devboard
+>>>>>>> 57becabb9ad135f4382fc4e04f9700d90779396d
