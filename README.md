@@ -1,11 +1,10 @@
-<<<<<<< HEAD
 # DevBoard
 
 A modern productivity dashboard built with **HTML5**, **CSS3**, **Vanilla JavaScript**, and **Tailwind CSS**.
 
 ## Overview
 
-DevBoard helps developers manage tasks, projects, and workflow in a clean, responsive interface — with data persisted locally via LocalStorage.
+DevBoard helps developers manage tasks, projects, and workflow in a clean, responsive SaaS-style interface.
 
 ## Tech Stack
 
@@ -13,7 +12,6 @@ DevBoard helps developers manage tasks, projects, and workflow in a clean, respo
 - CSS3
 - Vanilla JavaScript
 - Tailwind CSS (CDN)
-- LocalStorage
 
 ## Project Structure
 
@@ -41,18 +39,14 @@ devboard/
 
 ## Development Phases
 
-| Phase | Status    | Description                              |
-| ----- | --------- | ---------------------------------------- |
-| 1     | Complete  | Project scaffold & dashboard layout      |
-| 2     | Complete  | Dashboard statistics cards UI            |
-| 3     | Complete  | LocalStorage persistence                 |
-| 4     | Planned   | Tasks CRUD                               |
-| 5     | Planned   | Projects CRUD                            |
-| 6     | Planned   | Dark mode support                        |
+| Phase | Status   | Description                         |
+| ----- | -------- | ----------------------------------- |
+| 1     | Complete | Dashboard layout with sidebar & stats |
+| 2     | Planned  | LocalStorage persistence            |
+| 3     | Planned  | Task management                     |
+| 4     | Planned  | Project management                  |
+| 5     | Planned  | Dark mode support                   |
 
 ## License
 
 MIT
-=======
-# devboard
->>>>>>> 57becabb9ad135f4382fc4e04f9700d90779396d

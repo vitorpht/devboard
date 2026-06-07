@@ -1,8 +1,21 @@
 /**
  * DevBoard — Theme Module
- * Phase 1: Placeholder (Dark mode support in a future phase)
+ * Phase 1: Theme toggle placeholder (no dark mode yet)
  */
 
 const Theme = {
-  // Theme switching will be implemented in a future phase
+  /**
+   * Initializes the theme toggle placeholder button
+   */
+  init() {
+    const toggle = document.getElementById("theme-toggle");
+
+    if (!toggle) {
+      return;
+    }
+
+    toggle.addEventListener("click", function () {
+      console.info("[DevBoard] Theme toggle — coming in a future phase");
+    });
+  },
 };
