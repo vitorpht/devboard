@@ -6,6 +6,16 @@ A modern productivity dashboard built with **HTML5**, **CSS3**, **Vanilla JavaSc
 
 DevBoard helps developers manage tasks, projects, and workflow in a clean, responsive SaaS-style interface.
 
+## Screenshots
+
+| Dashboard (Light) | Dashboard (Dark) |
+| --- | --- |
+| ![Dashboard in light mode](docs/screenshots/dashboard-light.png) | ![Dashboard in dark mode](docs/screenshots/dashboard-dark.png) |
+
+| Task Management | Project Management |
+| --- | --- |
+| ![Task management](docs/screenshots/tasks-management.png) | ![Project management](docs/screenshots/projects-management.png) |
+
 ## Tech Stack
 
 - HTML5
@@ -49,6 +59,7 @@ devboard/
 | 5     | Complete | Project management and task association |
 | 6     | Complete | UI & UX professional polish         |
 | 7     | Complete | Dark mode support                   |
+| 8     | Complete | Portfolio screenshots               |
 
 ## License
 
