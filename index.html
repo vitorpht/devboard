@@ -348,9 +348,9 @@
               <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <h4 class="section-label">Task List</h4>
                 <div id="task-filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter tasks">
-                  <button type="button" data-filter="all" class="btn-filter btn-filter--active">All</button>
-                  <button type="button" data-filter="pending" class="btn-filter">Pending</button>
-                  <button type="button" data-filter="completed" class="btn-filter">Completed</button>
+                  <button type="button" data-filter="all" class="btn-filter btn-filter--active" aria-pressed="true">All</button>
+                  <button type="button" data-filter="pending" class="btn-filter" aria-pressed="false">Pending</button>
+                  <button type="button" data-filter="completed" class="btn-filter" aria-pressed="false">Completed</button>
                 </div>
               </div>
 
@@ -367,6 +367,7 @@
 
     <!-- JavaScript modules (load order matters) -->
     <script src="src/js/storage.js"></script>
+    <script src="src/js/utils.js"></script>
     <script src="src/js/tasks.js"></script>
     <script src="src/js/projects.js"></script>
     <script src="src/js/theme.js"></script>

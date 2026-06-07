@@ -1,6 +1,5 @@
 /**
  * DevBoard — Storage Module
- * Phase 2: LocalStorage persistence layer
  */
 
 const Storage = {
@@ -85,21 +84,6 @@ const Storage = {
    * @returns {{ tasks: Array, projects: Array, theme: string }}
    */
   loadData() {
-    this.initializeStorage();
-
-    try {
-      const raw = localStorage.getItem(this.STORAGE_KEY);
-
-      if (raw === null) {
-        return this.getDefaultData();
-      }
-
-      return this.normalizeData(JSON.parse(raw));
-    } catch (error) {
-      console.error("[DevBoard Storage] Failed to load data:", error);
-      const defaults = this.getDefaultData();
-      this.saveData(defaults);
-      return defaults;
-    }
+    return this.initializeStorage();
   },
 };

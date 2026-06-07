@@ -1,13 +1,10 @@
 /**
  * DevBoard — Theme Module
- * Phase 7: Dark mode with LocalStorage persistence
  */
 
 const Theme = {
   /** @type {{ tasks: Array, projects: Array, theme: string } | null} */
   appData: null,
-
-  VALID_THEMES: ["light", "dark"],
 
   /**
    * Initializes the theme module with application data

@@ -1,6 +1,5 @@
 /**
  * DevBoard — Tasks Module
- * Phase 5: Task actions with project association
  */
 
 const Tasks = {
@@ -117,18 +116,6 @@ const Tasks = {
   },
 
   /**
-   * Generates a unique task identifier
-   * @returns {string}
-   */
-  generateId() {
-    if (typeof crypto !== "undefined" && crypto.randomUUID) {
-      return crypto.randomUUID();
-    }
-
-    return Date.now().toString(36) + Math.random().toString(36).slice(2);
-  },
-
-  /**
    * Parses and validates a project ID from form input
    * @param {string} projectId
    * @returns {string | null}
@@ -168,7 +155,7 @@ const Tasks = {
     }
 
     const task = {
-      id: this.generateId(),
+      id: Utils.generateId(),
       title: validation.data.title,
       description: validation.data.description,
       priority: validation.data.priority,
@@ -394,25 +381,16 @@ const Tasks = {
 
       if (isActive) {
         button.className = "btn-filter btn-filter--active";
+        button.setAttribute("aria-pressed", "true");
       } else {
         button.className = "btn-filter";
+        button.setAttribute("aria-pressed", "false");
       }
     });
   },
 
   /**
-   * Escapes HTML to prevent XSS when rendering user content
-   * @param {string} text
-   * @returns {string}
-   */
-  escapeHtml(text) {
-    const element = document.createElement("div");
-    element.textContent = text;
-    return element.innerHTML;
-  },
-
-  /**
-   * Returns Tailwind classes for a priority badge
+   * Returns CSS classes for a priority badge
    * @param {string} priority
    * @returns {string}
    */
@@ -441,27 +419,27 @@ const Tasks = {
     const titleClass = task.completed ? "task-card__title task-card__title--completed" : "task-card__title";
 
     const descriptionHtml = task.description
-      ? `<p class="task-card__description">${this.escapeHtml(task.description)}</p>`
+      ? `<p class="task-card__description">${Utils.escapeHtml(task.description)}</p>`
       : "";
 
     const project = task.projectId ? Projects.getProjectById(task.projectId) : null;
     const projectHtml = project
-      ? `<span class="badge badge--project">${this.escapeHtml(project.name)}</span>`
+      ? `<span class="badge badge--project">${Utils.escapeHtml(project.name)}</span>`
       : "";
 
     return (
-      `<li class="${cardClass}" data-task-id="${this.escapeHtml(task.id)}">` +
+      `<li class="${cardClass}" data-task-id="${Utils.escapeHtml(task.id)}">` +
       `<div class="task-card__header">` +
-      `<h5 class="${titleClass}">${this.escapeHtml(task.title)}</h5>` +
+      `<h5 class="${titleClass}">${Utils.escapeHtml(task.title)}</h5>` +
       `<div class="task-card__badges">` +
       `${projectHtml}` +
-      `<span class="${priorityClass}">${this.escapeHtml(task.priority)}</span>` +
+      `<span class="${priorityClass}">${Utils.escapeHtml(task.priority)}</span>` +
       `<span class="${statusClass}">${statusLabel}</span>` +
       `</div></div>${descriptionHtml}` +
       `<div class="task-card__actions">` +
-      `<button type="button" data-action="complete" data-task-id="${this.escapeHtml(task.id)}" class="btn-action btn-action--complete" aria-label="${completeLabel} task">${completeLabel}</button>` +
-      `<button type="button" data-action="edit" data-task-id="${this.escapeHtml(task.id)}" class="btn-action btn-action--edit" aria-label="Edit task">Edit</button>` +
-      `<button type="button" data-action="delete" data-task-id="${this.escapeHtml(task.id)}" class="btn-action btn-action--delete" aria-label="Delete task">Delete</button>` +
+      `<button type="button" data-action="complete" data-task-id="${Utils.escapeHtml(task.id)}" class="btn-action btn-action--complete" aria-label="${completeLabel} task">${completeLabel}</button>` +
+      `<button type="button" data-action="edit" data-task-id="${Utils.escapeHtml(task.id)}" class="btn-action btn-action--edit" aria-label="Edit task">Edit</button>` +
+      `<button type="button" data-action="delete" data-task-id="${Utils.escapeHtml(task.id)}" class="btn-action btn-action--delete" aria-label="Delete task">Delete</button>` +
       `</div></li>`
     );
   },

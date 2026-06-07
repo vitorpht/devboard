@@ -1,6 +1,5 @@
 /**
  * DevBoard — Projects Module
- * Phase 5: Project management and task association
  */
 
 const Projects = {
@@ -91,18 +90,6 @@ const Projects = {
   },
 
   /**
-   * Generates a unique project identifier
-   * @returns {string}
-   */
-  generateId() {
-    if (typeof crypto !== "undefined" && crypto.randomUUID) {
-      return crypto.randomUUID();
-    }
-
-    return Date.now().toString(36) + Math.random().toString(36).slice(2);
-  },
-
-  /**
    * Creates a new project and persists it to LocalStorage
    * @param {string} name
    * @param {string} description
@@ -116,7 +103,7 @@ const Projects = {
     }
 
     const project = {
-      id: this.generateId(),
+      id: Utils.generateId(),
       name: validation.data.name,
       description: validation.data.description,
       createdAt: Date.now(),
@@ -182,8 +169,10 @@ const Projects = {
 
       if (isAllActive || isProjectActive) {
         button.className = "project-card project-card--active";
+        button.setAttribute("aria-pressed", "true");
       } else {
         button.className = "project-card";
+        button.setAttribute("aria-pressed", "false");
       }
     });
   },
@@ -216,17 +205,6 @@ const Projects = {
   },
 
   /**
-   * Escapes HTML to prevent XSS when rendering user content
-   * @param {string} text
-   * @returns {string}
-   */
-  escapeHtml(text) {
-    const element = document.createElement("div");
-    element.textContent = text;
-    return element.innerHTML;
-  },
-
-  /**
    * Builds the HTML string for a single project card
    * @param {object} project
    * @returns {string}
@@ -236,15 +214,15 @@ const Projects = {
     const taskLabel = taskCount === 1 ? "task" : "tasks";
 
     const descriptionHtml = project.description
-      ? `<p class="project-card__description">${this.escapeHtml(project.description)}</p>`
+      ? `<p class="project-card__description">${Utils.escapeHtml(project.description)}</p>`
       : "";
 
     return (
       `<li>` +
-      `<button type="button" data-project-filter="${this.escapeHtml(project.id)}" class="project-card" aria-label="Filter tasks for ${this.escapeHtml(project.name)}">` +
+      `<button type="button" data-project-filter="${Utils.escapeHtml(project.id)}" class="project-card" aria-label="Filter tasks for ${Utils.escapeHtml(project.name)}">` +
       `<div class="project-card__inner">` +
       `<div>` +
-      `<h5 class="project-card__name">${this.escapeHtml(project.name)}</h5>` +
+      `<h5 class="project-card__name">${Utils.escapeHtml(project.name)}</h5>` +
       `${descriptionHtml}` +
       `</div>` +
       `<div class="project-card__count" aria-label="${taskCount} associated ${taskLabel}">` +

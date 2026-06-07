@@ -1,6 +1,5 @@
 /* =============================================
    DevBoard — Custom Styles
-   Phase 6: UI & UX professional polish
    ============================================= */
 
 /* --- Layout utilities --- */
@@ -644,9 +643,7 @@
   }
 }
 
-/* =============================================
-   Phase 7: Dark mode & theme transitions
-   ============================================= */
+/* --- Dark mode & theme transitions --- */
 
 html.theme-transition,
 html.theme-transition *,

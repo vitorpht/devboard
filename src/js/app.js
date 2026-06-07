@@ -1,13 +1,9 @@
 /**
  * DevBoard — Main Application Entry Point
- * Phase 7: Dark mode and application initialization
  */
 
 (function () {
   "use strict";
-
-  /** @type {{ tasks: Array, projects: Array, theme: string } | null} */
-  let appData = null;
 
   /**
    * Initialize responsive sidebar toggle for mobile
@@ -184,26 +180,19 @@
    * Initialize the DevBoard application
    */
   function init() {
-    const tasksSection = document.getElementById("tasks-section");
-
-    if (!tasksSection) {
-      console.warn("[DevBoard] Tasks section not found.");
+    if (!document.getElementById("tasks-section")) {
       return;
     }
 
     initSidebar();
 
-    Storage.initializeStorage();
-    appData = Storage.loadData();
+    const appData = Storage.loadData();
 
     Theme.init(appData);
     Projects.init(appData);
     Tasks.init(appData);
     initProjectForm();
     initTaskForm();
-
-    console.info("[DevBoard] Application initialized — Phase 7");
-    console.info("[DevBoard] Loaded data:", appData);
   }
 
   document.addEventListener("DOMContentLoaded", init);
