@@ -1,6 +1,6 @@
 /**
  * DevBoard — Main Application Entry Point
- * Phase 6: UI polish and application initialization
+ * Phase 7: Dark mode and application initialization
  */
 
 (function () {
@@ -192,17 +192,17 @@
     }
 
     initSidebar();
-    Theme.init();
 
     Storage.initializeStorage();
     appData = Storage.loadData();
 
+    Theme.init(appData);
     Projects.init(appData);
     Tasks.init(appData);
     initProjectForm();
     initTaskForm();
 
-    console.info("[DevBoard] Application initialized — Phase 6");
+    console.info("[DevBoard] Application initialized — Phase 7");
     console.info("[DevBoard] Loaded data:", appData);
   }
 

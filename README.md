@@ -48,7 +48,7 @@ devboard/
 | 4     | Complete | Task actions — complete, edit, delete, filters |
 | 5     | Complete | Project management and task association |
 | 6     | Complete | UI & UX professional polish         |
-| 7     | Planned  | Dark mode support                   |
+| 7     | Complete | Dark mode support                   |
 
 ## License
 

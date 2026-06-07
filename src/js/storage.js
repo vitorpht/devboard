@@ -33,7 +33,7 @@ const Storage = {
     return {
       tasks: Array.isArray(data.tasks) ? data.tasks : defaults.tasks,
       projects: Array.isArray(data.projects) ? data.projects : defaults.projects,
-      theme: typeof data.theme === "string" ? data.theme : defaults.theme,
+      theme: data.theme === "dark" ? "dark" : "light",
     };
   },
 
