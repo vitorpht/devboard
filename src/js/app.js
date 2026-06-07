@@ -1,6 +1,6 @@
 /**
  * DevBoard — Main Application Entry Point
- * Phase 3: Application initialization and event listeners
+ * Phase 4: Application initialization and event listeners
  */
 
 (function () {
@@ -82,7 +82,7 @@
   }
 
   /**
-   * Registers event listeners for the task creation form
+   * Registers event listeners for the task form
    */
   function initTaskForm() {
     const form = document.getElementById("task-form");
@@ -99,11 +99,27 @@
       const descriptionInput = document.getElementById("task-description");
       const priorityInput = document.getElementById("task-priority");
 
-      const result = Tasks.createTask(
-        titleInput.value,
-        descriptionInput.value,
-        priorityInput.value
-      );
+      let result;
+
+      if (Tasks.editingTaskId) {
+        result = Tasks.editTask(
+          Tasks.editingTaskId,
+          titleInput.value,
+          descriptionInput.value,
+          priorityInput.value
+        );
+      } else {
+        result = Tasks.createTask(
+          titleInput.value,
+          descriptionInput.value,
+          priorityInput.value
+        );
+
+        if (result.success) {
+          form.reset();
+          priorityInput.value = "Medium";
+        }
+      }
 
       if (!result.success) {
         showTaskFormError(result.error);
@@ -111,9 +127,9 @@
         return;
       }
 
-      form.reset();
-      priorityInput.value = "Medium";
-      titleInput.focus();
+      if (!Tasks.editingTaskId) {
+        titleInput.focus();
+      }
     });
   }
 
@@ -137,7 +153,7 @@
     Tasks.init(appData);
     initTaskForm();
 
-    console.info("[DevBoard] Application initialized — Phase 3");
+    console.info("[DevBoard] Application initialized — Phase 4");
     console.info("[DevBoard] Loaded data:", appData);
   }
 
