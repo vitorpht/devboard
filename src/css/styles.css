@@ -1,0 +1,68 @@
+/* =============================================
+   DevBoard — Custom Styles
+   Phase 1: Base layout & typography overrides
+   Phase 2: Statistics cards
+   ============================================= */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base body layout — sticky footer pattern */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dashboard container transitions for future interactivity */
+.dashboard-panel {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.dashboard-panel:hover {
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.07),
+    0 2px 4px -2px rgb(0 0 0 / 0.05);
+  border-color: rgb(203 213 225);
+}
+
+/* Statistics cards */
+.stat-card {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.stat-card:hover {
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.08),
+    0 4px 6px -4px rgb(0 0 0 / 0.05);
+  border-color: rgb(203 213 225);
+  transform: translateY(-1px);
+}
+
+.stat-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid rgb(79 70 229);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .dashboard-panel,
+  .stat-card {
+    transition: none;
+  }
+
+  .stat-card:hover {
+    transform: none;
+  }
+}

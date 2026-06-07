@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DevBoard — A modern productivity dashboard for developers."
+    />
+    <title>DevBoard — Productivity Dashboard</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="src/css/styles.css" />
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md"
+    >
+      <div
+        class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 shadow-sm"
+            aria-hidden="true"
+          >
+            <svg
+              class="h-5 w-5 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+              />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+              DevBoard
+            </h1>
+            <p class="hidden text-sm text-slate-500 sm:block">
+              Your developer productivity dashboard
+            </p>
+          </div>
+        </div>
+
+        <span
+          class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20"
+        >
+          Phase 3
+        </span>
+      </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <!-- Dashboard Header -->
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">
+          Dashboard
+        </h2>
+        <p class="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
+          Welcome to DevBoard. Manage your tasks, projects, and workflow — all
+          in one place.
+        </p>
+      </section>
+
+      <!-- Statistics Cards -->
+      <section
+        id="stats"
+        class="stats-grid mb-6 grid grid-cols-1 gap-4 sm:mb-8 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4"
+        aria-label="Dashboard statistics"
+      >
+        <!-- Total Tasks -->
+        <article class="stat-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="flex items-start justify-between">
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600"
+              aria-hidden="true"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                />
+              </svg>
+            </div>
+          </div>
+          <p class="mt-4 text-sm font-medium text-slate-500">Total Tasks</p>
+          <p class="stat-value mt-1 text-3xl font-bold tracking-tight text-slate-900">
+            24
+          </p>
+          <p class="mt-2 text-xs text-slate-400">All tasks in your workspace</p>
+        </article>
+
+        <!-- Pending Tasks -->
+        <article class="stat-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="flex items-start justify-between">
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600"
+              aria-hidden="true"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <p class="mt-4 text-sm font-medium text-slate-500">Pending Tasks</p>
+          <p class="stat-value mt-1 text-3xl font-bold tracking-tight text-slate-900">
+            8
+          </p>
+          <p class="mt-2 text-xs text-slate-400">Awaiting completion</p>
+        </article>
+
+        <!-- Completed Tasks -->
+        <article class="stat-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="flex items-start justify-between">
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600"
+              aria-hidden="true"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <p class="mt-4 text-sm font-medium text-slate-500">Completed Tasks</p>
+          <p class="stat-value mt-1 text-3xl font-bold tracking-tight text-slate-900">
+            16
+          </p>
+          <p class="mt-2 text-xs text-slate-400">Successfully finished</p>
+        </article>
+
+        <!-- Active Projects -->
+        <article class="stat-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="flex items-start justify-between">
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-50 text-violet-600"
+              aria-hidden="true"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                />
+              </svg>
+            </div>
+          </div>
+          <p class="mt-4 text-sm font-medium text-slate-500">Active Projects</p>
+          <p class="stat-value mt-1 text-3xl font-bold tracking-tight text-slate-900">
+            5
+          </p>
+          <p class="mt-2 text-xs text-slate-400">Currently in progress</p>
+        </article>
+      </section>
+
+      <!-- Dashboard Container -->
+      <section
+        id="dashboard"
+        class="dashboard-container grid gap-4 sm:gap-6 lg:grid-cols-2"
+        aria-label="Dashboard content area"
+      >
+        <!-- Overview Panel -->
+        <article
+          class="dashboard-panel rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-2"
+        >
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Overview</h3>
+              <p class="mt-1 text-sm text-slate-500">
+                Your workspace at a glance
+              </p>
+            </div>
+            <span
+              class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-400"
+              aria-hidden="true"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                />
+              </svg>
+            </span>
+          </div>
+
+          <div
+            class="mt-6 flex min-h-[80px] items-center justify-center rounded-xl border border-slate-100 bg-slate-50 px-4 py-6"
+          >
+            <p class="text-center text-sm text-slate-500">
+              Detailed charts and activity feed will appear here in a future phase.
+            </p>
+          </div>
+        </article>
+
+        <!-- Tasks Panel Placeholder -->
+        <article
+          class="dashboard-panel rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+        >
+          <h3 class="text-lg font-semibold text-slate-900">Tasks</h3>
+          <p class="mt-1 text-sm text-slate-500">Track your daily to-dos</p>
+          <div
+            class="mt-6 flex min-h-[160px] items-center justify-center rounded-xl border-2 border-dashed border-slate-200 bg-slate-50"
+          >
+            <p class="text-sm text-slate-400">Coming soon</p>
+          </div>
+        </article>
+
+        <!-- Projects Panel Placeholder -->
+        <article
+          class="dashboard-panel rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+        >
+          <h3 class="text-lg font-semibold text-slate-900">Projects</h3>
+          <p class="mt-1 text-sm text-slate-500">Organize your work</p>
+          <div
+            class="mt-6 flex min-h-[160px] items-center justify-center rounded-xl border-2 border-dashed border-slate-200 bg-slate-50"
+          >
+            <p class="text-sm text-slate-400">Coming soon</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-200 bg-white">
+      <div
+        class="mx-auto max-w-7xl px-4 py-4 text-center text-xs text-slate-400 sm:px-6 lg:px-8"
+      >
+        <p>&copy; 2026 DevBoard. Built with HTML, CSS &amp; JavaScript.</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript modules (load order matters) -->
+    <script src="src/js/storage.js"></script>
+    <script src="src/js/tasks.js"></script>
+    <script src="src/js/projects.js"></script>
+    <script src="src/js/theme.js"></script>
+    <script src="src/js/app.js"></script>
+  </body>
+</html>
