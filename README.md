@@ -44,7 +44,7 @@ devboard/
 | ----- | -------- | ----------------------------------- |
 | 1     | Complete | Dashboard layout with sidebar & stats |
 | 2     | Complete | LocalStorage persistence            |
-| 3     | Planned  | Task management                     |
+| 3     | Complete | Task creation and rendering           |
 | 4     | Planned  | Project management                  |
 | 5     | Planned  | Dark mode support                   |
 

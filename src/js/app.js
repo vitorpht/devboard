@@ -1,6 +1,6 @@
 /**
  * DevBoard — Main Application Entry Point
- * Phase 2: Dashboard layout + storage initialization
+ * Phase 3: Application initialization and event listeners
  */
 
 (function () {
@@ -53,13 +53,78 @@
   }
 
   /**
+   * Shows a validation error on the task form
+   * @param {string} message
+   */
+  function showTaskFormError(message) {
+    const errorEl = document.getElementById("task-form-error");
+
+    if (!errorEl) {
+      return;
+    }
+
+    errorEl.textContent = message;
+    errorEl.classList.remove("hidden");
+  }
+
+  /**
+   * Clears the task form validation error
+   */
+  function clearTaskFormError() {
+    const errorEl = document.getElementById("task-form-error");
+
+    if (!errorEl) {
+      return;
+    }
+
+    errorEl.textContent = "";
+    errorEl.classList.add("hidden");
+  }
+
+  /**
+   * Registers event listeners for the task creation form
+   */
+  function initTaskForm() {
+    const form = document.getElementById("task-form");
+
+    if (!form) {
+      return;
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      clearTaskFormError();
+
+      const titleInput = document.getElementById("task-title");
+      const descriptionInput = document.getElementById("task-description");
+      const priorityInput = document.getElementById("task-priority");
+
+      const result = Tasks.createTask(
+        titleInput.value,
+        descriptionInput.value,
+        priorityInput.value
+      );
+
+      if (!result.success) {
+        showTaskFormError(result.error);
+        titleInput.focus();
+        return;
+      }
+
+      form.reset();
+      priorityInput.value = "Medium";
+      titleInput.focus();
+    });
+  }
+
+  /**
    * Initialize the DevBoard application
    */
   function init() {
-    const dashboard = document.getElementById("dashboard");
+    const tasksSection = document.getElementById("tasks-section");
 
-    if (!dashboard) {
-      console.warn("[DevBoard] Dashboard container not found.");
+    if (!tasksSection) {
+      console.warn("[DevBoard] Tasks section not found.");
       return;
     }
 
@@ -69,7 +134,10 @@
     Storage.initializeStorage();
     appData = Storage.loadData();
 
-    console.info("[DevBoard] Application initialized — Phase 2");
+    Tasks.init(appData);
+    initTaskForm();
+
+    console.info("[DevBoard] Application initialized — Phase 3");
     console.info("[DevBoard] Loaded data:", appData);
   }
 
