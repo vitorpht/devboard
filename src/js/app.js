@@ -1,6 +1,6 @@
 /**
  * DevBoard — Main Application Entry Point
- * Phase 4: Application initialization and event listeners
+ * Phase 5: Application initialization and event listeners
  */
 
 (function () {
@@ -82,6 +82,35 @@
   }
 
   /**
+   * Shows a validation error on the project form
+   * @param {string} message
+   */
+  function showProjectFormError(message) {
+    const errorEl = document.getElementById("project-form-error");
+
+    if (!errorEl) {
+      return;
+    }
+
+    errorEl.textContent = message;
+    errorEl.classList.remove("hidden");
+  }
+
+  /**
+   * Clears the project form validation error
+   */
+  function clearProjectFormError() {
+    const errorEl = document.getElementById("project-form-error");
+
+    if (!errorEl) {
+      return;
+    }
+
+    errorEl.textContent = "";
+    errorEl.classList.add("hidden");
+  }
+
+  /**
    * Registers event listeners for the task form
    */
   function initTaskForm() {
@@ -98,6 +127,7 @@
       const titleInput = document.getElementById("task-title");
       const descriptionInput = document.getElementById("task-description");
       const priorityInput = document.getElementById("task-priority");
+      const projectInput = document.getElementById("task-project");
 
       let result;
 
@@ -106,18 +136,21 @@
           Tasks.editingTaskId,
           titleInput.value,
           descriptionInput.value,
-          priorityInput.value
+          priorityInput.value,
+          projectInput.value
         );
       } else {
         result = Tasks.createTask(
           titleInput.value,
           descriptionInput.value,
-          priorityInput.value
+          priorityInput.value,
+          projectInput.value
         );
 
         if (result.success) {
           form.reset();
           priorityInput.value = "Medium";
+          projectInput.value = "";
         }
       }
 
@@ -130,6 +163,36 @@
       if (!Tasks.editingTaskId) {
         titleInput.focus();
       }
+    });
+  }
+
+  /**
+   * Registers event listeners for the project form
+   */
+  function initProjectForm() {
+    const form = document.getElementById("project-form");
+
+    if (!form) {
+      return;
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      clearProjectFormError();
+
+      const nameInput = document.getElementById("project-name");
+      const descriptionInput = document.getElementById("project-description");
+
+      const result = Projects.createProject(nameInput.value, descriptionInput.value);
+
+      if (!result.success) {
+        showProjectFormError(result.error);
+        nameInput.focus();
+        return;
+      }
+
+      form.reset();
+      nameInput.focus();
     });
   }
 
@@ -150,10 +213,12 @@
     Storage.initializeStorage();
     appData = Storage.loadData();
 
+    Projects.init(appData);
     Tasks.init(appData);
+    initProjectForm();
     initTaskForm();
 
-    console.info("[DevBoard] Application initialized — Phase 4");
+    console.info("[DevBoard] Application initialized — Phase 5");
     console.info("[DevBoard] Loaded data:", appData);
   }
 

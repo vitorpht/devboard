@@ -46,7 +46,7 @@ devboard/
 | 2     | Complete | LocalStorage persistence            |
 | 3     | Complete | Task creation and rendering           |
 | 4     | Complete | Task actions — complete, edit, delete, filters |
-| 5     | Planned  | Project management                  |
+| 5     | Complete | Project management and task association |
 | 6     | Planned  | Dark mode support                   |
 
 ## License

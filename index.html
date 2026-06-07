@@ -158,6 +158,9 @@
                 </div>
               </div>
               <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="total">0</p>
+            </article>
+
+            <!-- Pending Tasks -->
             <article class="stat-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-slate-500">Pending Tasks</p>
@@ -168,6 +171,9 @@
                 </div>
               </div>
               <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="pending">0</p>
+            </article>
+
+            <!-- Completed Tasks -->
             <article class="stat-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-slate-500">Completed Tasks</p>
@@ -178,6 +184,9 @@
                 </div>
               </div>
               <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="completed">0</p>
+            </article>
+
+            <!-- Active Projects -->
             <article class="stat-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-slate-500">Active Projects</p>
@@ -187,8 +196,77 @@
                   </svg>
                 </div>
               </div>
-              <p class="stat-value mt-3 text-3xl font-bold text-slate-900">0</p>
+              <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="projects">0</p>
             </article>
+          </section>
+
+          <!-- Project management -->
+          <section
+            id="projects-section"
+            class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:mb-8"
+            aria-label="Project management"
+          >
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-slate-900">Projects</h3>
+              <p class="mt-1 text-sm text-slate-500">Create projects and organize your tasks.</p>
+            </div>
+
+            <form id="project-form" class="mb-8 space-y-4" novalidate>
+              <div
+                id="project-form-error"
+                class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                role="alert"
+              ></div>
+
+              <div>
+                <label for="project-name" class="mb-1.5 block text-sm font-medium text-slate-700">
+                  Project Name <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="project-name"
+                  name="name"
+                  required
+                  placeholder="Enter project name"
+                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                />
+              </div>
+
+              <div>
+                <label for="project-description" class="mb-1.5 block text-sm font-medium text-slate-700">
+                  Description
+                </label>
+                <textarea
+                  id="project-description"
+                  name="description"
+                  rows="2"
+                  placeholder="Enter project description (optional)"
+                  class="w-full resize-none rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
+              >
+                Create Project
+              </button>
+            </form>
+
+            <div>
+              <h4 class="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-500">
+                Project List
+              </h4>
+
+              <div
+                id="project-list-empty"
+                class="flex min-h-[100px] items-center justify-center rounded-lg border-2 border-dashed border-slate-200 bg-slate-50"
+              >
+                <p class="text-sm text-slate-400">No projects yet. Create your first project above.</p>
+              </div>
+
+              <ul id="project-list" class="space-y-3" aria-live="polite"></ul>
+            </div>
           </section>
 
           <!-- Task management -->
@@ -249,6 +327,19 @@
                   <option value="Low">Low</option>
                   <option value="Medium" selected>Medium</option>
                   <option value="High">High</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="task-project" class="mb-1.5 block text-sm font-medium text-slate-700">
+                  Project
+                </label>
+                <select
+                  id="task-project"
+                  name="projectId"
+                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                >
+                  <option value="">No Project</option>
                 </select>
               </div>
 

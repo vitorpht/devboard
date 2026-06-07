@@ -1,6 +1,6 @@
 /**
  * DevBoard — Tasks Module
- * Phase 4: Task actions — complete, edit, delete, and filters
+ * Phase 5: Task actions with project association
  */
 
 const Tasks = {
@@ -12,6 +12,9 @@ const Tasks = {
 
   /** @type {"all" | "pending" | "completed"} */
   currentFilter: "all",
+
+  /** @type {string | null} */
+  currentProjectFilter: null,
 
   VALID_PRIORITIES: ["Low", "Medium", "High"],
 
@@ -126,13 +129,38 @@ const Tasks = {
   },
 
   /**
+   * Parses and validates a project ID from form input
+   * @param {string} projectId
+   * @returns {string | null}
+   */
+  parseProjectId(projectId) {
+    if (!projectId) {
+      return null;
+    }
+
+    const project = Projects.getProjectById(projectId);
+
+    return project ? projectId : null;
+  },
+
+  /**
+   * Sets the active project filter and re-renders the task list
+   * @param {string | null} projectId
+   */
+  setProjectFilter(projectId) {
+    this.currentProjectFilter = projectId;
+    this.renderTasks();
+  },
+
+  /**
    * Creates a new task and persists it to LocalStorage
    * @param {string} title
    * @param {string} description
    * @param {string} priority
+   * @param {string} projectId
    * @returns {{ success: boolean, error?: string, task?: object }}
    */
-  createTask(title, description, priority) {
+  createTask(title, description, priority, projectId) {
     const validation = this.validateTask(title, description, priority);
 
     if (!validation.valid) {
@@ -145,7 +173,7 @@ const Tasks = {
       description: validation.data.description,
       priority: validation.data.priority,
       completed: false,
-      projectId: null,
+      projectId: this.parseProjectId(projectId),
       createdAt: Date.now(),
     };
 
@@ -153,6 +181,7 @@ const Tasks = {
     Storage.saveData(this.appData);
     this.renderTasks();
     this.updateDashboardStats();
+    Projects.renderProjects();
 
     return { success: true, task: task };
   },
@@ -163,9 +192,10 @@ const Tasks = {
    * @param {string} title
    * @param {string} description
    * @param {string} priority
+   * @param {string} projectId
    * @returns {{ success: boolean, error?: string, task?: object }}
    */
-  editTask(taskId, title, description, priority) {
+  editTask(taskId, title, description, priority, projectId) {
     const task = this.getTaskById(taskId);
 
     if (!task) {
@@ -181,11 +211,13 @@ const Tasks = {
     task.title = validation.data.title;
     task.description = validation.data.description;
     task.priority = validation.data.priority;
+    task.projectId = this.parseProjectId(projectId);
 
     Storage.saveData(this.appData);
     this.cancelEdit();
     this.renderTasks();
     this.updateDashboardStats();
+    Projects.renderProjects();
 
     return { success: true, task: task };
   },
@@ -205,6 +237,7 @@ const Tasks = {
     const titleInput = document.getElementById("task-title");
     const descriptionInput = document.getElementById("task-description");
     const priorityInput = document.getElementById("task-priority");
+    const projectInput = document.getElementById("task-project");
     const submitBtn = document.getElementById("task-submit-btn");
     const cancelBtn = document.getElementById("task-cancel-edit");
 
@@ -216,6 +249,10 @@ const Tasks = {
     titleInput.value = task.title;
     descriptionInput.value = task.description;
     priorityInput.value = task.priority;
+
+    if (projectInput) {
+      projectInput.value = task.projectId || "";
+    }
     submitBtn.textContent = "Save Changes";
 
     if (cancelBtn) {
@@ -238,6 +275,7 @@ const Tasks = {
     const submitBtn = document.getElementById("task-submit-btn");
     const cancelBtn = document.getElementById("task-cancel-edit");
     const priorityInput = document.getElementById("task-priority");
+    const projectInput = document.getElementById("task-project");
 
     if (form) {
       form.reset();
@@ -245,6 +283,10 @@ const Tasks = {
 
     if (priorityInput) {
       priorityInput.value = "Medium";
+    }
+
+    if (projectInput) {
+      projectInput.value = "";
     }
 
     if (submitBtn) {
@@ -272,6 +314,7 @@ const Tasks = {
     Storage.saveData(this.appData);
     this.renderTasks();
     this.updateDashboardStats();
+    Projects.renderProjects();
 
     return { success: true };
   },
@@ -298,6 +341,7 @@ const Tasks = {
     Storage.saveData(this.appData);
     this.renderTasks();
     this.updateDashboardStats();
+    Projects.renderProjects();
 
     return { success: true };
   },
@@ -408,11 +452,17 @@ const Tasks = {
       ? `<p class="mt-2 text-sm text-slate-500">${this.escapeHtml(task.description)}</p>`
       : "";
 
+    const project = task.projectId ? Projects.getProjectById(task.projectId) : null;
+    const projectHtml = project
+      ? `<span class="inline-flex items-center rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-medium text-violet-700 ring-1 ring-inset ring-violet-600/20">${this.escapeHtml(project.name)}</span>`
+      : "";
+
     return (
       `<li class="${itemClass}" data-task-id="${this.escapeHtml(task.id)}">` +
       `<div class="flex flex-wrap items-start justify-between gap-3">` +
       `<h5 class="${titleClass}">${this.escapeHtml(task.title)}</h5>` +
       `<div class="flex flex-wrap gap-2">` +
+      `${projectHtml}` +
       `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${priorityClass}">${this.escapeHtml(task.priority)}</span>` +
       `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${statusClass}">${statusLabel}</span>` +
       `</div></div>${descriptionHtml}` +
@@ -437,7 +487,8 @@ const Tasks = {
     }
 
     const allTasks = this.appData.tasks;
-    const filteredTasks = this.filterTasks(this.currentFilter);
+    let filteredTasks = this.filterTasks(this.currentFilter);
+    filteredTasks = Projects.filterTasksByProject(filteredTasks, this.currentProjectFilter);
 
     if (filteredTasks.length === 0) {
       list.innerHTML = "";
@@ -449,6 +500,11 @@ const Tasks = {
       if (emptyMessage) {
         if (allTasks.length === 0) {
           emptyMessage.textContent = "No tasks yet. Create your first task above.";
+        } else if (this.currentProjectFilter) {
+          const project = Projects.getProjectById(this.currentProjectFilter);
+          emptyMessage.textContent = project
+            ? `No tasks in "${project.name}".`
+            : "No tasks for this project.";
         } else if (this.currentFilter === "pending") {
           emptyMessage.textContent = "No pending tasks.";
         } else if (this.currentFilter === "completed") {
@@ -500,5 +556,7 @@ const Tasks = {
     if (completedEl) {
       completedEl.textContent = String(completed);
     }
+
+    Projects.updateDashboardStats();
   },
 };
