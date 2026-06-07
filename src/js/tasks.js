@@ -393,11 +393,9 @@ const Tasks = {
       const isActive = button.getAttribute("data-filter") === Tasks.currentFilter;
 
       if (isActive) {
-        button.className =
-          "filter-btn rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white";
+        button.className = "btn-filter btn-filter--active";
       } else {
-        button.className =
-          "filter-btn rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50";
+        button.className = "btn-filter";
       }
     });
   },
@@ -421,11 +419,11 @@ const Tasks = {
   getPriorityBadgeClass(priority) {
     switch (priority) {
       case "High":
-        return "bg-red-50 text-red-700 ring-red-600/20";
+        return "badge badge--priority-high";
       case "Medium":
-        return "bg-amber-50 text-amber-700 ring-amber-600/20";
+        return "badge badge--priority-medium";
       default:
-        return "bg-slate-100 text-slate-600 ring-slate-500/20";
+        return "badge badge--priority-low";
     }
   },
 
@@ -437,39 +435,33 @@ const Tasks = {
   buildTaskCard(task) {
     const priorityClass = this.getPriorityBadgeClass(task.priority);
     const statusLabel = task.completed ? "Completed" : "Pending";
-    const statusClass = task.completed
-      ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
-      : "bg-amber-50 text-amber-700 ring-amber-600/20";
+    const statusClass = task.completed ? "badge badge--status-completed" : "badge badge--status-pending";
     const completeLabel = task.completed ? "Reopen" : "Complete";
-    const itemClass = task.completed
-      ? "task-item rounded-lg border border-slate-200 bg-slate-50 p-4 opacity-60"
-      : "task-item rounded-lg border border-slate-200 bg-slate-50 p-4";
-    const titleClass = task.completed
-      ? "text-base font-semibold text-slate-900 line-through"
-      : "text-base font-semibold text-slate-900";
+    const cardClass = task.completed ? "task-card task-card--completed" : "task-card";
+    const titleClass = task.completed ? "task-card__title task-card__title--completed" : "task-card__title";
 
     const descriptionHtml = task.description
-      ? `<p class="mt-2 text-sm text-slate-500">${this.escapeHtml(task.description)}</p>`
+      ? `<p class="task-card__description">${this.escapeHtml(task.description)}</p>`
       : "";
 
     const project = task.projectId ? Projects.getProjectById(task.projectId) : null;
     const projectHtml = project
-      ? `<span class="inline-flex items-center rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-medium text-violet-700 ring-1 ring-inset ring-violet-600/20">${this.escapeHtml(project.name)}</span>`
+      ? `<span class="badge badge--project">${this.escapeHtml(project.name)}</span>`
       : "";
 
     return (
-      `<li class="${itemClass}" data-task-id="${this.escapeHtml(task.id)}">` +
-      `<div class="flex flex-wrap items-start justify-between gap-3">` +
+      `<li class="${cardClass}" data-task-id="${this.escapeHtml(task.id)}">` +
+      `<div class="task-card__header">` +
       `<h5 class="${titleClass}">${this.escapeHtml(task.title)}</h5>` +
-      `<div class="flex flex-wrap gap-2">` +
+      `<div class="task-card__badges">` +
       `${projectHtml}` +
-      `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${priorityClass}">${this.escapeHtml(task.priority)}</span>` +
-      `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${statusClass}">${statusLabel}</span>` +
+      `<span class="${priorityClass}">${this.escapeHtml(task.priority)}</span>` +
+      `<span class="${statusClass}">${statusLabel}</span>` +
       `</div></div>${descriptionHtml}` +
-      `<div class="mt-4 flex flex-wrap gap-2">` +
-      `<button type="button" data-action="complete" data-task-id="${this.escapeHtml(task.id)}" class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100">${completeLabel}</button>` +
-      `<button type="button" data-action="edit" data-task-id="${this.escapeHtml(task.id)}" class="rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-medium text-indigo-700 hover:bg-indigo-100">Edit</button>` +
-      `<button type="button" data-action="delete" data-task-id="${this.escapeHtml(task.id)}" class="rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-medium text-red-700 hover:bg-red-100">Delete</button>` +
+      `<div class="task-card__actions">` +
+      `<button type="button" data-action="complete" data-task-id="${this.escapeHtml(task.id)}" class="btn-action btn-action--complete" aria-label="${completeLabel} task">${completeLabel}</button>` +
+      `<button type="button" data-action="edit" data-task-id="${this.escapeHtml(task.id)}" class="btn-action btn-action--edit" aria-label="Edit task">Edit</button>` +
+      `<button type="button" data-action="delete" data-task-id="${this.escapeHtml(task.id)}" class="btn-action btn-action--delete" aria-label="Delete task">Delete</button>` +
       `</div></li>`
     );
   },

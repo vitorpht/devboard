@@ -181,11 +181,9 @@ const Projects = {
         Projects.activeProjectId && filterId === Projects.activeProjectId;
 
       if (isAllActive || isProjectActive) {
-        button.className =
-          "project-filter-btn w-full rounded-lg border border-violet-200 bg-violet-50 p-4 text-left ring-2 ring-violet-500/20";
+        button.className = "project-card project-card--active";
       } else {
-        button.className =
-          "project-filter-btn w-full rounded-lg border border-slate-200 bg-slate-50 p-4 text-left hover:border-slate-300 hover:bg-white";
+        button.className = "project-card";
       }
     });
   },
@@ -238,19 +236,21 @@ const Projects = {
     const taskLabel = taskCount === 1 ? "task" : "tasks";
 
     const descriptionHtml = project.description
-      ? `<p class="mt-1 text-sm text-slate-500">${this.escapeHtml(project.description)}</p>`
+      ? `<p class="project-card__description">${this.escapeHtml(project.description)}</p>`
       : "";
 
     return (
       `<li>` +
-      `<button type="button" data-project-filter="${this.escapeHtml(project.id)}" class="project-filter-btn w-full rounded-lg border border-slate-200 bg-slate-50 p-4 text-left hover:border-slate-300 hover:bg-white">` +
-      `<div class="flex items-start justify-between gap-3">` +
+      `<button type="button" data-project-filter="${this.escapeHtml(project.id)}" class="project-card" aria-label="Filter tasks for ${this.escapeHtml(project.name)}">` +
+      `<div class="project-card__inner">` +
       `<div>` +
-      `<h5 class="text-base font-semibold text-slate-900">${this.escapeHtml(project.name)}</h5>` +
+      `<h5 class="project-card__name">${this.escapeHtml(project.name)}</h5>` +
       `${descriptionHtml}` +
       `</div>` +
-      `<span class="shrink-0 rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-medium text-violet-700 ring-1 ring-inset ring-violet-600/20">${taskCount} ${taskLabel}</span>` +
-      `</div></button></li>`
+      `<div class="project-card__count" aria-label="${taskCount} associated ${taskLabel}">` +
+      `<span class="project-card__count-value">${taskCount}</span>` +
+      `<span class="project-card__count-label">${taskLabel}</span>` +
+      `</div></div></button></li>`
     );
   },
 
@@ -267,10 +267,16 @@ const Projects = {
 
     const allProjectsButton =
       `<li>` +
-      `<button type="button" data-project-filter="all" class="project-filter-btn w-full rounded-lg border border-violet-200 bg-violet-50 p-4 text-left ring-2 ring-violet-500/20">` +
-      `<h5 class="text-base font-semibold text-slate-900">All Projects</h5>` +
-      `<p class="mt-1 text-sm text-slate-500">Show tasks from every project</p>` +
-      `</button></li>`;
+      `<button type="button" data-project-filter="all" class="project-card project-card--active" aria-label="Show tasks from all projects">` +
+      `<div class="project-card__inner">` +
+      `<div>` +
+      `<h5 class="project-card__name">All Projects</h5>` +
+      `<p class="project-card__description">Show tasks from every project</p>` +
+      `</div>` +
+      `<div class="project-card__count" aria-hidden="true">` +
+      `<span class="project-card__count-value">${this.appData.projects.length}</span>` +
+      `<span class="project-card__count-label">total</span>` +
+      `</div></div></button></li>`;
 
     if (this.appData.projects.length === 0) {
       list.innerHTML = allProjectsButton;

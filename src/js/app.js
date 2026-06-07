@@ -1,6 +1,6 @@
 /**
  * DevBoard — Main Application Entry Point
- * Phase 5: Application initialization and event listeners
+ * Phase 6: UI polish and application initialization
  */
 
 (function () {
@@ -56,58 +56,42 @@
    * Shows a validation error on the task form
    * @param {string} message
    */
+  function showFormError(elementId, message) {
+    const errorEl = document.getElementById(elementId);
+
+    if (!errorEl) {
+      return;
+    }
+
+    errorEl.textContent = message;
+    errorEl.classList.add("is-visible");
+  }
+
+  function clearFormError(elementId) {
+    const errorEl = document.getElementById(elementId);
+
+    if (!errorEl) {
+      return;
+    }
+
+    errorEl.textContent = "";
+    errorEl.classList.remove("is-visible");
+  }
+
   function showTaskFormError(message) {
-    const errorEl = document.getElementById("task-form-error");
-
-    if (!errorEl) {
-      return;
-    }
-
-    errorEl.textContent = message;
-    errorEl.classList.remove("hidden");
+    showFormError("task-form-error", message);
   }
 
-  /**
-   * Clears the task form validation error
-   */
   function clearTaskFormError() {
-    const errorEl = document.getElementById("task-form-error");
-
-    if (!errorEl) {
-      return;
-    }
-
-    errorEl.textContent = "";
-    errorEl.classList.add("hidden");
+    clearFormError("task-form-error");
   }
 
-  /**
-   * Shows a validation error on the project form
-   * @param {string} message
-   */
   function showProjectFormError(message) {
-    const errorEl = document.getElementById("project-form-error");
-
-    if (!errorEl) {
-      return;
-    }
-
-    errorEl.textContent = message;
-    errorEl.classList.remove("hidden");
+    showFormError("project-form-error", message);
   }
 
-  /**
-   * Clears the project form validation error
-   */
   function clearProjectFormError() {
-    const errorEl = document.getElementById("project-form-error");
-
-    if (!errorEl) {
-      return;
-    }
-
-    errorEl.textContent = "";
-    errorEl.classList.add("hidden");
+    clearFormError("project-form-error");
   }
 
   /**
@@ -218,7 +202,7 @@
     initProjectForm();
     initTaskForm();
 
-    console.info("[DevBoard] Application initialized — Phase 5");
+    console.info("[DevBoard] Application initialized — Phase 6");
     console.info("[DevBoard] Loaded data:", appData);
   }
 

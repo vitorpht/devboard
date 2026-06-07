@@ -56,7 +56,7 @@
         <!-- Sidebar navigation -->
         <nav class="flex-1 space-y-1 px-3 py-4" aria-label="Sidebar menu">
           <a
-            href="#"
+            href="#stats"
             class="sidebar-link flex items-center gap-3 rounded-lg bg-indigo-50 px-3 py-2.5 text-sm font-medium text-indigo-700"
             aria-current="page"
           >
@@ -66,7 +66,7 @@
             Dashboard
           </a>
           <a
-            href="#"
+            href="#tasks-section"
             class="sidebar-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
           >
             <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -75,7 +75,7 @@
             Tasks
           </a>
           <a
-            href="#"
+            href="#projects-section"
             class="sidebar-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
           >
             <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -86,7 +86,6 @@
         </nav>
 
         <!-- Sidebar footer -->
-        <div class="border-t border-slate-200 px-5 py-4">
           <p class="text-xs text-slate-400">DevBoard v1.0</p>
         </div>
       </aside>
@@ -148,121 +147,105 @@
             aria-label="Dashboard statistics"
           >
             <!-- Total Tasks -->
-            <article class="stat-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-slate-500">Total Tasks</p>
-                <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600" aria-hidden="true">
-                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <article class="stat-card stat-card--total">
+              <div class="stat-card__header">
+                <p class="stat-card__label">Total Tasks</p>
+                <div class="stat-card__icon" aria-hidden="true">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                   </svg>
                 </div>
               </div>
-              <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="total">0</p>
+              <p class="stat-card__value" data-stat="total">0</p>
             </article>
 
             <!-- Pending Tasks -->
-            <article class="stat-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-slate-500">Pending Tasks</p>
-                <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600" aria-hidden="true">
-                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <article class="stat-card stat-card--pending">
+              <div class="stat-card__header">
+                <p class="stat-card__label">Pending Tasks</p>
+                <div class="stat-card__icon" aria-hidden="true">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
-              <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="pending">0</p>
+              <p class="stat-card__value" data-stat="pending">0</p>
             </article>
 
             <!-- Completed Tasks -->
-            <article class="stat-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-slate-500">Completed Tasks</p>
-                <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600" aria-hidden="true">
-                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <article class="stat-card stat-card--completed">
+              <div class="stat-card__header">
+                <p class="stat-card__label">Completed Tasks</p>
+                <div class="stat-card__icon" aria-hidden="true">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
-              <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="completed">0</p>
+              <p class="stat-card__value" data-stat="completed">0</p>
             </article>
 
             <!-- Active Projects -->
-            <article class="stat-card rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-slate-500">Active Projects</p>
-                <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-50 text-violet-600" aria-hidden="true">
-                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <article class="stat-card stat-card--projects">
+              <div class="stat-card__header">
+                <p class="stat-card__label">Active Projects</p>
+                <div class="stat-card__icon" aria-hidden="true">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                   </svg>
                 </div>
               </div>
-              <p class="stat-value mt-3 text-3xl font-bold text-slate-900" data-stat="projects">0</p>
+              <p class="stat-card__value" data-stat="projects">0</p>
             </article>
           </section>
 
-          <!-- Project management -->
           <section
             id="projects-section"
-            class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:mb-8"
+            class="panel mb-6 sm:mb-8"
             aria-label="Project management"
           >
-            <div class="mb-6">
-              <h3 class="text-lg font-semibold text-slate-900">Projects</h3>
-              <p class="mt-1 text-sm text-slate-500">Create projects and organize your tasks.</p>
+            <div class="panel-header">
+              <h3 class="panel-title">Projects</h3>
+              <p class="panel-subtitle">Create projects and organize your tasks.</p>
             </div>
 
-            <form id="project-form" class="mb-8 space-y-4" novalidate>
-              <div
-                id="project-form-error"
-                class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-                role="alert"
-              ></div>
+            <form id="project-form" class="mb-8 space-y-5" novalidate>
+              <div id="project-form-error" class="form-error" role="alert" aria-live="polite"></div>
 
-              <div>
-                <label for="project-name" class="mb-1.5 block text-sm font-medium text-slate-700">
-                  Project Name <span class="text-red-500">*</span>
+              <div class="form-field">
+                <label for="project-name" class="form-label">
+                  Project Name <span class="form-label-required" aria-hidden="true">*</span>
                 </label>
                 <input
                   type="text"
                   id="project-name"
                   name="name"
                   required
+                  autocomplete="off"
                   placeholder="Enter project name"
-                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                  class="form-input"
                 />
               </div>
 
-              <div>
-                <label for="project-description" class="mb-1.5 block text-sm font-medium text-slate-700">
-                  Description
-                </label>
+              <div class="form-field">
+                <label for="project-description" class="form-label">Description</label>
                 <textarea
                   id="project-description"
                   name="description"
                   rows="2"
                   placeholder="Enter project description (optional)"
-                  class="w-full resize-none rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                  class="form-textarea"
                 ></textarea>
               </div>
 
-              <button
-                type="submit"
-                class="inline-flex items-center justify-center rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
-              >
-                Create Project
-              </button>
+              <button type="submit" class="btn btn-violet">Create Project</button>
             </form>
 
             <div>
-              <h4 class="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-500">
-                Project List
-              </h4>
+              <h4 class="section-label mb-4">Project List</h4>
 
-              <div
-                id="project-list-empty"
-                class="flex min-h-[100px] items-center justify-center rounded-lg border-2 border-dashed border-slate-200 bg-slate-50"
-              >
-                <p class="text-sm text-slate-400">No projects yet. Create your first project above.</p>
+              <div id="project-list-empty" class="empty-state">
+                <p class="empty-state__message">No projects yet. Create your first project above.</p>
               </div>
 
               <ul id="project-list" class="space-y-3" aria-live="polite"></ul>
@@ -272,90 +255,67 @@
           <!-- Task management -->
           <section
             id="tasks-section"
-            class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+            class="panel"
             aria-label="Task management"
           >
-            <div class="mb-6">
-              <h3 class="text-lg font-semibold text-slate-900">Tasks</h3>
-              <p class="mt-1 text-sm text-slate-500">Create and manage your tasks.</p>
+            <div class="panel-header">
+              <h3 class="panel-title">Tasks</h3>
+              <p class="panel-subtitle">Create and manage your tasks.</p>
             </div>
 
             <!-- Task creation form -->
-            <form id="task-form" class="mb-8 space-y-4" novalidate>
-              <div
-                id="task-form-error"
-                class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-                role="alert"
-              ></div>
+            <form id="task-form" class="mb-8 space-y-5" novalidate>
+              <div id="task-form-error" class="form-error" role="alert" aria-live="polite"></div>
 
-              <div>
-                <label for="task-title" class="mb-1.5 block text-sm font-medium text-slate-700">
-                  Title <span class="text-red-500">*</span>
+              <div class="form-field">
+                <label for="task-title" class="form-label">
+                  Title <span class="form-label-required" aria-hidden="true">*</span>
                 </label>
                 <input
                   type="text"
                   id="task-title"
                   name="title"
                   required
+                  autocomplete="off"
                   placeholder="Enter task title"
-                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                  class="form-input"
                 />
               </div>
 
-              <div>
-                <label for="task-description" class="mb-1.5 block text-sm font-medium text-slate-700">
-                  Description
-                </label>
+              <div class="form-field">
+                <label for="task-description" class="form-label">Description</label>
                 <textarea
                   id="task-description"
                   name="description"
                   rows="3"
                   placeholder="Enter task description (optional)"
-                  class="w-full resize-none rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                  class="form-textarea"
                 ></textarea>
               </div>
 
-              <div>
-                <label for="task-priority" class="mb-1.5 block text-sm font-medium text-slate-700">
-                  Priority
-                </label>
-                <select
-                  id="task-priority"
-                  name="priority"
-                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
-                >
-                  <option value="Low">Low</option>
-                  <option value="Medium" selected>Medium</option>
-                  <option value="High">High</option>
-                </select>
-              </div>
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div class="form-field">
+                  <label for="task-priority" class="form-label">Priority</label>
+                  <select id="task-priority" name="priority" class="form-select">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                  </select>
+                </div>
 
-              <div>
-                <label for="task-project" class="mb-1.5 block text-sm font-medium text-slate-700">
-                  Project
-                </label>
-                <select
-                  id="task-project"
-                  name="projectId"
-                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
-                >
-                  <option value="">No Project</option>
-                </select>
+                <div class="form-field">
+                  <label for="task-project" class="form-label">Project</label>
+                  <select id="task-project" name="projectId" class="form-select">
+                    <option value="">No Project</option>
+                  </select>
+                </div>
               </div>
 
               <div class="flex flex-wrap gap-3">
-                <button
-                  type="submit"
-                  id="task-submit-btn"
-                  class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
+                <button type="submit" id="task-submit-btn" class="btn btn-primary">
                   Create Task
                 </button>
-                <button
-                  type="button"
-                  id="task-cancel-edit"
-                  class="hidden inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
+                <button type="button" id="task-cancel-edit" class="btn btn-secondary hidden">
                   Cancel
                 </button>
               </div>
@@ -363,40 +323,17 @@
 
             <!-- Task list -->
             <div>
-              <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-                <h4 class="text-sm font-semibold uppercase tracking-wide text-slate-500">
-                  Task List
-                </h4>
+              <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <h4 class="section-label">Task List</h4>
                 <div id="task-filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter tasks">
-                  <button
-                    type="button"
-                    data-filter="all"
-                    class="filter-btn rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white"
-                  >
-                    All
-                  </button>
-                  <button
-                    type="button"
-                    data-filter="pending"
-                    class="filter-btn rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
-                  >
-                    Pending
-                  </button>
-                  <button
-                    type="button"
-                    data-filter="completed"
-                    class="filter-btn rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
-                  >
-                    Completed
-                  </button>
+                  <button type="button" data-filter="all" class="btn-filter btn-filter--active">All</button>
+                  <button type="button" data-filter="pending" class="btn-filter">Pending</button>
+                  <button type="button" data-filter="completed" class="btn-filter">Completed</button>
                 </div>
               </div>
 
-              <div
-                id="task-list-empty"
-                class="flex min-h-[120px] items-center justify-center rounded-lg border-2 border-dashed border-slate-200 bg-slate-50"
-              >
-                <p id="task-list-empty-message" class="text-sm text-slate-400">No tasks yet. Create your first task above.</p>
+              <div id="task-list-empty" class="empty-state">
+                <p id="task-list-empty-message" class="empty-state__message">No tasks yet. Create your first task above.</p>
               </div>
 
               <ul id="task-list" class="space-y-3" aria-live="polite"></ul>
